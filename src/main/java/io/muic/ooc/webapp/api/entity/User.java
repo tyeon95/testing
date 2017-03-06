@@ -31,7 +31,7 @@ public class User {
 
     private String username;
 
-    private String name;
+//    private String name;
 
     private String hashedPassword;
 
@@ -40,12 +40,22 @@ public class User {
     @Column(name = "role")
     private Set<String> roles = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
-    @JoinTable(name = "join_user_group",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "group_id")
-    )
-    private Set<UserGroup> groups = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name = "join_user_friend", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "friend")
+    private Set<String> friends = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @CollectionTable(name = "user_profile", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "firstname")
+    @Column(name = "lastname")
+
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @CollectionTable(name = "user_credential", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "hashed_password")
+    @Column(name = "created")
+
 
     public Long getId() {
         return id;
@@ -87,12 +97,12 @@ public class User {
         this.roles = roles;
     }
 
-    public Set<UserGroup> getGroups() {
-        return groups;
+    public Set<UserFriend> getFriends() {
+        return Friends;
     }
 
-    public void setGroups(Set<UserGroup> groups) {
-        this.groups = groups;
+    public void setFriends(Set<UserFriend> Friends) {
+        this.Friends = Friends;
     }
 
 }
