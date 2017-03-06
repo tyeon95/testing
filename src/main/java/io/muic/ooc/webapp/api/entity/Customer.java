@@ -1,7 +1,6 @@
 // tag::sample[]
-package io.muic.ooc.webapp;
+package io.muic.ooc.webapp.api.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
