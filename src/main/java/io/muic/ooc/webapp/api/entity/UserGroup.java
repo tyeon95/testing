@@ -5,44 +5,42 @@
  */
 package io.muic.ooc.webapp.api.entity;
 
+import io.muic.ooc.webapp.api.entity.auditing.BaseEntity;
+import org.hibernate.annotations.Where;
+
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 /**
  *
  * @author gigadot
  */
 @Entity
-public class UserGroup {
-
+@Where(clause = "is_active = 1")
+public class UserGroup extends BaseEntity {
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
+
+    private RoleType role;
 
     private String description;
 
-    private String name;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "join_user_group",
-        inverseJoinColumns = @JoinColumn(name = "user_id"),
-        joinColumns = @JoinColumn(name = "group_id")
-    )
+    @OneToMany
+    @JoinColumn(name = "users")
     private Set<User> users = new HashSet<>();
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public RoleType getRole() {
+        return role;
+    }
+
+    public void setRole(RoleType role) {
+        this.role = role;
     }
 
     public String getDescription() {
@@ -53,19 +51,17 @@ public class UserGroup {
         this.description = description;
     }
 
-    public String getName() {
-        return name;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
-//    public Set<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set<User> users) {
-//        this.users = users;
-//    }
+    public enum RoleType {
+        STUDENT,
+        PROFESSOR,
+        ADMIN
+    }
 }
