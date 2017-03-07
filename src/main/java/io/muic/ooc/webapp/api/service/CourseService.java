@@ -1,7 +1,6 @@
 package io.muic.ooc.webapp.api.service;
 
 import io.muic.ooc.webapp.api.entity.Course;
-import io.muic.ooc.webapp.api.entity.Schedule;
 import io.muic.ooc.webapp.api.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,12 +31,8 @@ public class CourseService {
         return courseRepository.findOne(id);
     }
 
-    public Set<Course> findBySchedule(Schedule schedule) {
-        return courseRepository.findBySchedule(schedule);
-    }
-
-    private Course save(Course schedule) {
-        return courseRepository.save(schedule);
+    private Course save(Course course) {
+        return courseRepository.save(course);
     }
 
     public Course create(String code, String name, String time, int capacity) {

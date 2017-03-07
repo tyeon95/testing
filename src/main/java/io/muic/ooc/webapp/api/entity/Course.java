@@ -1,12 +1,13 @@
 package io.muic.ooc.webapp.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.muic.ooc.webapp.api.entity.auditing.BaseEntity;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by tyeon on 3/7/17.
@@ -27,7 +28,9 @@ public class Course extends BaseEntity {
 
     private int capacity;
 
-    /* TODO: MANYTOMANY TRIMESTER*/
+    @ManyToMany(cascade= CascadeType.ALL, mappedBy="courses")
+    @OrderBy(value="created")
+    private Set<Trimester> trimesters = new HashSet<>();
 
     public long getId() {
         return id;
@@ -63,5 +66,14 @@ public class Course extends BaseEntity {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    @JsonIgnore
+    public Set<Trimester> getTrimesters() {
+        return trimesters;
+    }
+
+    public void setTrimesters(Set<Trimester> trimesters) {
+        this.trimesters = trimesters;
     }
 }

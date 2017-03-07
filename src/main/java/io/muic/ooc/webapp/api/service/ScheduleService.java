@@ -66,7 +66,7 @@ public class ScheduleService {
     }
 
     private void archiveRelations(Schedule schedule) {
-        for (Course course : courseRepository.findBySchedule(schedule)) {
+        for (Course course : schedule.getCourses()) {
             course.setActive(false);
             courseRepository.save(course);
         }
