@@ -13,5 +13,4 @@ import java.util.Set;
  */
 @RepositoryRestResource(exported = false)
 public interface CourseRepository extends JpaRepository<Course, Long> {
-    Set<Course> findByTrimester(Trimester trimester);
 }
