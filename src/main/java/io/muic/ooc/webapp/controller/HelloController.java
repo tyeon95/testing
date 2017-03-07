@@ -3,10 +3,8 @@ package io.muic.ooc.webapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.muic.ooc.webapp.api.entity.Customer;
 import io.muic.ooc.webapp.api.entity.User;
 import io.muic.ooc.webapp.api.entity.UserGroup;
-import io.muic.ooc.webapp.api.repository.CustomerRepository;
 import io.muic.ooc.webapp.api.repository.UserGroupRepository;
 import io.muic.ooc.webapp.api.repository.UserRepository;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -21,9 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class HelloController {
-
-    @Autowired
-    private CustomerRepository customerRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -31,20 +26,20 @@ public class HelloController {
 
     @GetMapping(value = {"/"})
     public String index(Model model) {
-        Customer customer = new Customer();
-        customer.setFirstName(RandomStringUtils.randomAlphabetic(5));
-        customer.setLastName(RandomStringUtils.randomAlphabetic(5));
+//        Customer customer = new Customer();
+//        customer.setFirstName(RandomStringUtils.randomAlphabetic(5));
+//        customer.setLastName(RandomStringUtils.randomAlphabetic(5));
+//
+//        customerRepository.save(customer);
+//
+//        Iterable<Customer> customerIterable = customerRepository.findAll();
+//
+//        List<Customer> customers = new ArrayList<>();
+//        for (Customer c : customerIterable) {
+//            customers.add(c);
+//        }
 
-        customerRepository.save(customer);
-
-        Iterable<Customer> customerIterable = customerRepository.findAll();
-
-        List<Customer> customers = new ArrayList<>();
-        for (Customer c : customerIterable) {
-            customers.add(c);
-        }
-
-        model.addAttribute("customers", customers);
+//        model.addAttribute("customers", customers);
 
         return "hello";
     }
@@ -54,18 +49,18 @@ public class HelloController {
     @ResponseBody
     public List<User> addUser(Model model) {
 
-        UserGroup userGroup = new UserGroup();
-        userGroup.setDescription("xxx");
-        userGroup.setName(RandomStringUtils.randomAlphabetic(5));
-        userGroupRepository.save(userGroup);
-
-        User user = new User();
-        user.setUsername(RandomStringUtils.randomAlphabetic(5));
-        user.setName(RandomStringUtils.randomAlphabetic(5));
-        user.setHashedPassword(RandomStringUtils.randomAlphabetic(20));
-        user.getRoles().add("ADMIN");
-        user.getGroups().add(userGroup);
-        userRepository.save(user);
+//        UserGroup userGroup = new UserGroup();
+//        userGroup.setDescription("xxx");
+//        userGroup.setName(RandomStringUtils.randomAlphabetic(5));
+//        userGroupRepository.save(userGroup);
+//
+//        User user = new User();
+//        user.setUsername(RandomStringUtils.randomAlphabetic(5));
+//        user.setName(RandomStringUtils.randomAlphabetic(5));
+//        user.setHashedPassword(RandomStringUtils.randomAlphabetic(20));
+//        user.getRoles().add("ADMIN");
+//        user.getGroups().add(userGroup);
+//        userRepository.save(user);
 
         Iterable<User> userIterable = userRepository.findAll();
 
