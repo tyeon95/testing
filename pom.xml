@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.muic.ooc</groupId>
-    <artifactId>spring-webapp-jpa</artifactId>
+    <artifactId>ooc-spring-project</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Spring Boot Webapp JPA</name>
     <packaging>war</packaging>
