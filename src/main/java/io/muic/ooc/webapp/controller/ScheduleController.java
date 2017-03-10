@@ -47,7 +47,7 @@ public class ScheduleController {
         return frb;
     }
 
-    @RequestMapping(value = {"/{id}/", "/{id}"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/{id}/add_course/", "/{id}/add_course"}, method = RequestMethod.POST)
     public Map addCourseToSchedule(@PathVariable long id, @RequestParam(required = false) Long courseId) {
         HashMap<String, Object> frb = new HashMap<>();
         Schedule schedule = scheduleService.addCourse(id, courseId);
@@ -57,7 +57,7 @@ public class ScheduleController {
         return frb;
     }
 
-    @RequestMapping(value = {"/{id}/", "/{id}"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/{id}/remove_course/", "/{id}/remove_course"}, method = RequestMethod.POST)
     public Map removeCourseFromSchedule(@PathVariable long id, @RequestParam(required = false) Long courseId) {
         HashMap<String, Object> frb = new HashMap<>();
         Schedule schedule = scheduleService.removeCourse(id, courseId);
