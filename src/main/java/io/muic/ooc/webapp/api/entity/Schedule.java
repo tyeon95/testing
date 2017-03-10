@@ -14,6 +14,11 @@ import java.util.Set;
 @Entity
 @Where(clause = "is_active = 1")
 public class Schedule extends BaseEntity {
+    @Transient
+    public static final String SINGULAR = "schedule";
+    @Transient
+    public static final String PLURAL = SINGULAR + "s";
+
     @Id
     @GeneratedValue
     private long id;
@@ -22,11 +27,15 @@ public class Schedule extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany
-    @JoinColumn(name = "course")
+    @ManyToMany
+    @JoinTable(name="join_course_schedule",
+            joinColumns=@JoinColumn(name="course_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="schedule_id", referencedColumnName="id"))
     private Set<Course> courses = new HashSet<>();
 
-    /* TODO: INCLUDE @ONETOMANY COURSE AND @MANYTOONE TRIMESTER */
+    @ManyToOne
+    @JoinColumn(name = "trimester")
+    private Trimester trimester;
 
     public long getId() {
         return id;
@@ -48,5 +57,14 @@ public class Schedule extends BaseEntity {
 
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
+    }
+
+    @JsonIgnore
+    public Trimester getTrimester() {
+        return trimester;
+    }
+
+    public void setTrimester(Trimester trimester) {
+        this.trimester = trimester;
     }
 }

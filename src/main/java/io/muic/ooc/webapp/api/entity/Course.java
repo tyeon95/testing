@@ -15,6 +15,11 @@ import java.util.Set;
 @Entity
 @Where(clause = "is_active = 1")
 public class Course extends BaseEntity {
+    @Transient
+    public static final String SINGULAR = "course";
+    @Transient
+    public static final String PLURAL = SINGULAR + "s";
+
     @Id
     @GeneratedValue
     private long id;
@@ -31,6 +36,10 @@ public class Course extends BaseEntity {
     @ManyToMany(cascade= CascadeType.ALL, mappedBy="courses")
     @OrderBy(value="created")
     private Set<Trimester> trimesters = new HashSet<>();
+
+    @ManyToMany(cascade= CascadeType.ALL, mappedBy="courses")
+    @OrderBy(value="created")
+    private Set<Schedule> schedules = new HashSet<>();
 
     public long getId() {
         return id;
@@ -75,5 +84,14 @@ public class Course extends BaseEntity {
 
     public void setTrimesters(Set<Trimester> trimesters) {
         this.trimesters = trimesters;
+    }
+
+    @JsonIgnore
+    public Set<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(Set<Schedule> schedules) {
+        this.schedules = schedules;
     }
 }

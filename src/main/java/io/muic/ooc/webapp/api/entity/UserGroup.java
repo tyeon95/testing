@@ -28,7 +28,7 @@ public class UserGroup extends BaseEntity {
     private String description;
 
     @OneToMany
-    @JoinColumn(name = "users")
+    @JoinColumn(name = "user_groups")
     private Set<User> users = new HashSet<>();
 
     public long getId() {
