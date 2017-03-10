@@ -4,6 +4,8 @@ import io.muic.ooc.webapp.api.entity.Course;
 import io.muic.ooc.webapp.api.entity.Schedule;
 import io.muic.ooc.webapp.api.service.CourseService;
 import io.muic.ooc.webapp.api.service.ScheduleService;
+import io.muic.ooc.webapp.api.service.TrimesterService;
+import io.muic.ooc.webapp.api.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,10 @@ import java.util.Map;
 public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private TrimesterService trimesterService;
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public Map getSchedules() {
@@ -34,6 +40,20 @@ public class ScheduleController {
     public Map getSchedule(@PathVariable long id) {
         HashMap<String, Object> frb = new HashMap<>();
         frb.put(Schedule.SINGULAR, scheduleService.findOne(id));
+        return frb;
+    }
+
+    @RequestMapping(value = {"/{id}/get_by_user/", "/{id}/get_by_user"}, method = RequestMethod.GET)
+    public Map getScheduleByUser(@PathVariable long id) {
+        HashMap<String, Object> frb = new HashMap<>();
+        frb.put(Schedule.PLURAL, userService.getSchedules(id));
+        return frb;
+    }
+
+    @RequestMapping(value = {"/{id}/get_by_trimester/", "/{id}/get_by_trimester"}, method = RequestMethod.GET)
+    public Map getScheduleByTrimester(@PathVariable long id) {
+        HashMap<String, Object> frb = new HashMap<>();
+        frb.put(Schedule.PLURAL, trimesterService.getSchedules(id));
         return frb;
     }
 

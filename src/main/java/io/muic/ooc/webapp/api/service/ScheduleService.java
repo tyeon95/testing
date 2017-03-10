@@ -43,8 +43,9 @@ public class ScheduleService {
         return scheduleRepository.findOne(id);
     }
 
-    public Set<Schedule> findByUser(User user) {
-        return scheduleRepository.findByUser(user);
+    public Set<Course> getCourses(long id) {
+        Schedule schedule = findOne(id);
+        return courseRepository.findBySchedules(schedule);
     }
 
     private Schedule save(Schedule schedule) {

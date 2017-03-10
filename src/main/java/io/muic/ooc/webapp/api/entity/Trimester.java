@@ -14,6 +14,11 @@ import java.util.Set;
 @Entity
 @Where(clause = "is_active = 1")
 public class Trimester extends BaseEntity {
+    @Transient
+    public static final String SINGULAR = "trimester";
+    @Transient
+    public static final String PLURAL = SINGULAR + "s";
+
     @Id
     @GeneratedValue
     private long id;

@@ -1,6 +1,7 @@
 package io.muic.ooc.webapp.api.service;
 
 import io.muic.ooc.webapp.api.entity.Course;
+import io.muic.ooc.webapp.api.entity.Schedule;
 import io.muic.ooc.webapp.api.entity.Trimester;
 import io.muic.ooc.webapp.api.repository.CourseRepository;
 import io.muic.ooc.webapp.api.repository.TrimesterRepository;

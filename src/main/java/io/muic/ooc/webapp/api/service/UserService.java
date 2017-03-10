@@ -49,6 +49,11 @@ public class UserService {
         return userRepository.findByUserGroupOrderByCreatedDesc(userGroup);
     }
 
+    public Set<Schedule> getSchedules(long id) {
+        User user = findOne(id);
+        return scheduleRepository.findByUserOrderByIdDesc(user);
+    }
+
     private User save(User user) {
         return userRepository.save(user);
     }
