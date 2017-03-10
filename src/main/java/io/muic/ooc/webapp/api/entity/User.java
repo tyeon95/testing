@@ -18,6 +18,11 @@ import javax.persistence.*;
 @Entity
 @Where(clause = "is_active = 1")
 public class User extends BaseEntity {
+    @Transient
+    public static final String SINGULAR = "user";
+    @Transient
+    public static final String PLURAL = SINGULAR + "s";
+
     @Id
     @GeneratedValue
     private long id;

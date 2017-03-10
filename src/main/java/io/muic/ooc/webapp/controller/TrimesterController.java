@@ -44,10 +44,11 @@ public class TrimesterController {
     @RequestMapping(value = {"/", ""}, method = RequestMethod.POST)
     public Map createTrimester(@RequestParam(required = false) Integer trimester, @RequestParam(required = false) Integer year) {
         HashMap<String, Object> frb = new HashMap<>();
+        Trimester tri = null;
         if (trimester != null && year != null) {
-            Trimester tri = trimesterService.create(trimester, year);
-            frb.put(Trimester.SINGULAR, tri);
+            tri = trimesterService.create(trimester, year);
         }
+        frb.put(Trimester.SINGULAR, tri);
         return frb;
     }
 }

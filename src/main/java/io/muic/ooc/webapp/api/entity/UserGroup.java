@@ -19,6 +19,11 @@ import javax.persistence.*;
 @Entity
 @Where(clause = "is_active = 1")
 public class UserGroup extends BaseEntity {
+    @Transient
+    public static final String SINGULAR = "userGroup";
+    @Transient
+    public static final String PLURAL = SINGULAR + "s";
+
     @Id
     @GeneratedValue
     private long id;

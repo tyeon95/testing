@@ -59,7 +59,7 @@ public class UserGroupService {
 
     private void nullifyRelations(UserGroup userGroup) {
         for (User user : userRepository.findByUserGroup(userGroup)) {
-            user.setUserGroup(null); //TODO: CHECK THIS
+            user.setUserGroup(null);
             userRepository.save(user);
         }
     }

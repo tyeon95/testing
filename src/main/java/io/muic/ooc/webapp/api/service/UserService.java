@@ -60,11 +60,15 @@ public class UserService {
 
     public User create(String studentId, String firstname, String lastname, Long userGroupId, String hashedPassword) {
         User user = new User();
-        user.setStudentId(studentId);
-        user.setFirstname(firstname);
-        user.setLastname(lastname);
-        if (userGroupId != null) user.setUserGroup(userGroupRepository.findOne(userGroupId));
-        user.setHashedPassword(hashedPassword);
+        UserGroup userGroup = null;
+        if (userGroupId != null) userGroup = userGroupRepository.findOne(userGroupId);
+        if (userGroup != null) {
+            user.setStudentId(studentId);
+            user.setFirstname(firstname);
+            user.setLastname(lastname);
+            user.setUserGroup(userGroup);
+            user.setHashedPassword(hashedPassword);
+        }
         return save(user);
     }
 

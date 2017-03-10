@@ -61,9 +61,7 @@ public class ScheduleController {
     public Map createSchedule(@RequestParam(required = false) Long userId, @RequestParam(required = false) Long trimesterId) {
         HashMap<String, Object> frb = new HashMap<>();
         Schedule schedule = scheduleService.create(userId, trimesterId);
-        if (schedule != null) {
-            frb.put(Schedule.SINGULAR, schedule);
-        }
+        frb.put(Schedule.SINGULAR, schedule);
         return frb;
     }
 
@@ -71,9 +69,7 @@ public class ScheduleController {
     public Map addCourseToSchedule(@PathVariable long id, @RequestParam(required = false) Long courseId) {
         HashMap<String, Object> frb = new HashMap<>();
         Schedule schedule = scheduleService.addCourse(id, courseId);
-        if (schedule != null) {
-            frb.put(Schedule.SINGULAR, schedule);
-        }
+        frb.put(Schedule.SINGULAR, schedule);
         return frb;
     }
 
@@ -81,9 +77,7 @@ public class ScheduleController {
     public Map removeCourseFromSchedule(@PathVariable long id, @RequestParam(required = false) Long courseId) {
         HashMap<String, Object> frb = new HashMap<>();
         Schedule schedule = scheduleService.removeCourse(id, courseId);
-        if (schedule != null) {
-            frb.put(Schedule.SINGULAR, schedule);
-        }
+        frb.put(Schedule.SINGULAR, schedule);
         return frb;
     }
 

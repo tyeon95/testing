@@ -56,17 +56,16 @@ public class CourseController {
         return frb;
     }
 
-    /* TODO: GET COURSE BY TRIMESTER */
-
     @RequestMapping(value = {"/", ""}, method = RequestMethod.POST)
     public Map createCourse(@RequestParam(required = false) String code, @RequestParam(required = false) String name,
                              @RequestParam(required = false) String time, @RequestParam(required = false) int capacity,
                              @RequestParam(required = false) Long trimesterId) {
         HashMap<String, Object> frb = new HashMap<>();
+        Course course = null;
         if (!StringUtils.isBlank(code)) {
-            Course course = courseService.create(code, name, time, capacity, trimesterId);
-            frb.put(Course.SINGULAR, course);
+            course = courseService.create(code, name, time, capacity, trimesterId);
         }
+        frb.put(Course.SINGULAR, course);
         return frb;
     }
 
@@ -75,10 +74,11 @@ public class CourseController {
                              @RequestParam(required = false) String name, @RequestParam(required = false) String time,
                              @RequestParam(required = false) int capacity, @RequestParam(required = false) Long trimesterId) {
         HashMap<String, Object> frb = new HashMap<>();
+        Course course = null;
         if (!StringUtils.isBlank(code)) {
-            Course course = courseService.update(id, code, name, time, capacity, trimesterId);
-            frb.put(Course.SINGULAR, course);
+            course = courseService.update(id, code, name, time, capacity, trimesterId);
         }
+        frb.put(Course.SINGULAR, course);
         return frb;
     }
 
