@@ -12,7 +12,6 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public abstract class BaseActivityLog {
-    /* TODO: EDIT THIS */
     @Column(name = "created")
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate

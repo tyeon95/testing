@@ -3,12 +3,17 @@ package io.muic.ooc.webapp.api;
 import io.muic.ooc.webapp.api.entity.auditing.BaseActivityLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.persistence.Transient;
 import java.util.Date;
 
 /**
  * Created by tyeon on 3/11/17.
  */
 public class ActivityLogger {
+    @Transient
+    public static final String SINGULAR = "activityLogger";
+    @Transient
+    public static final String PLURAL = SINGULAR + "s";
 
     private Class<? extends BaseActivityLog> activityLogClass;
     private JpaRepository repository;
