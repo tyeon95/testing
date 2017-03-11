@@ -1,6 +1,7 @@
 package io.muic.ooc.webapp.api.service;
 
 import io.muic.ooc.webapp.api.ActivityLogger;
+import io.muic.ooc.webapp.api.ActivityType;
 import io.muic.ooc.webapp.api.entity.Course;
 import io.muic.ooc.webapp.api.entity.CourseActivity;
 import io.muic.ooc.webapp.api.entity.Schedule;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -71,6 +73,7 @@ public class CourseService {
         course.setTime(time);
         course.setCapacity(capacity);
         setTrimesters(course, trimesterId);
+        activityLogger.log(ActivityType.ADDED.toString(), course.getId(), trimesterId, course.toString(), new Date());
         return save(course);
     }
 
@@ -83,6 +86,7 @@ public class CourseService {
             course.setCapacity(capacity);
             setTrimesters(course, trimesterId);
             course = save(course);
+            activityLogger.log(ActivityType.UPDATED.toString(), course.getId(), trimesterId, course.toString(), new Date());
         }
         return course;
     }
@@ -92,6 +96,7 @@ public class CourseService {
         if (course != null) {
             course.setActive(false);
             save(course);
+            activityLogger.log(ActivityType.REMOVED.toString(), course.getId(), 0L, course.toString(), new Date());
         }
     }
 }

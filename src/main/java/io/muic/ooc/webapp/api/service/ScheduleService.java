@@ -1,6 +1,7 @@
 package io.muic.ooc.webapp.api.service;
 
 import io.muic.ooc.webapp.api.ActivityLogger;
+import io.muic.ooc.webapp.api.ActivityType;
 import io.muic.ooc.webapp.api.entity.*;
 import io.muic.ooc.webapp.api.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -87,6 +89,7 @@ public class ScheduleService {
             schedule.setUser(user);
             schedule.setTrimester(trimester);
             schedule = save(schedule);
+            activityLogger.log(ActivityType.ADDED.toString(), schedule.getId(), userId, schedule.toString(), new Date());
         }
         return schedule;
     }
@@ -104,6 +107,7 @@ public class ScheduleService {
                 schedule.setAddedCourses(addedCourses);
                 schedule = save(schedule);
             }
+            activityLogger.log(ActivityType.UPDATED.toString(), schedule.getId(), addedCourse.getId(), schedule.toString(), new Date());
         }
         return schedule;
     }
@@ -120,6 +124,7 @@ public class ScheduleService {
             }
             schedule.setAddedCourses(addedCourses);
             schedule = save(schedule);
+            activityLogger.log(ActivityType.UPDATED.toString(), schedule.getId(), addedCourseId, schedule.toString(), new Date());
             addedCourseService.archive(addedCourseId);
         }
         return schedule;
@@ -130,6 +135,7 @@ public class ScheduleService {
         if (schedule != null) {
             schedule.setActive(false);
             save(schedule);
+            activityLogger.log(ActivityType.REMOVED.toString(), schedule.getId(), schedule.getUser().getId(), schedule.toString(), new Date());
         }
     }
 }

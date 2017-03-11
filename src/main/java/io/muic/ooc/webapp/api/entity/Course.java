@@ -96,4 +96,11 @@ public class Course extends BaseEntity {
 //    public void setSchedules(Set<Schedule> schedules) {
 //        this.schedules = schedules;
 //    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "Course[id=%d, code='%s', name='%s', time='%s', capacity=%d]",
+            id, code, name, capacity);
+    }
 }

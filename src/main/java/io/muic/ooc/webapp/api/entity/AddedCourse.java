@@ -84,4 +84,11 @@ public class AddedCourse extends BaseEntity {
         CONFLICT_WITH_COURSE,
         CONFLICT_WITH_FRIEND
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "Course[id=%d, schedule=%d, course=%s, type='%s', reason='%s']",
+            id, schedule.getId(), course.getId(), type.toString(), reason.toString());
+    }
 }

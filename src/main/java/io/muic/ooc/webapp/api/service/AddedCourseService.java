@@ -1,6 +1,7 @@
 package io.muic.ooc.webapp.api.service;
 
 import io.muic.ooc.webapp.api.ActivityLogger;
+import io.muic.ooc.webapp.api.ActivityType;
 import io.muic.ooc.webapp.api.entity.*;
 import io.muic.ooc.webapp.api.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -67,6 +69,7 @@ public class AddedCourseService {
             addedCourse.setSchedule(schedule);
             addedCourse.setCourse(course);
             addedCourse = save(addedCourse);
+            activityLogger.log(ActivityType.ADDED.toString(), schedule.getId(), course.getId(), addedCourse.toString(), new Date());
         }
         return addedCourse;
     }
@@ -77,6 +80,8 @@ public class AddedCourseService {
             addedCourse.setType(AddedCourse.AddType.valueOf(type));
             addedCourse.setReason(AddedCourse.AddReason.valueOf(reason));
             addedCourse = save(addedCourse);
+            activityLogger.log(ActivityType.UPDATED.toString(), addedCourse.getSchedule().getId(), addedCourse.getCourse().getId(),
+                    addedCourse.toString(), new Date());
         }
         return addedCourse;
     }
@@ -86,6 +91,8 @@ public class AddedCourseService {
         if (addedCourse != null) {
             addedCourse.setActive(false);
             save(addedCourse);
+            activityLogger.log(ActivityType.REMOVED.toString(), addedCourse.getSchedule().getId(), addedCourse.getCourse().getId(),
+                    addedCourse.toString(), new Date());
         }
     }
 }

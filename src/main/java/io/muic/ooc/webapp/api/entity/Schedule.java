@@ -80,4 +80,11 @@ public class Schedule extends BaseEntity {
     public void setTrimester(Trimester trimester) {
         this.trimester = trimester;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Course[id=%d, user=%d, trimester=%d]",
+                id, user.getId(), trimester.getId());
+    }
 }
