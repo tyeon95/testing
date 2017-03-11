@@ -42,7 +42,6 @@ public class CourseController {
         return frb;
     }
 
-//    TODO: FIX THIS TO ADDEDCOURSE
     @RequestMapping(value = {"/{id}/get_by_schedule/}", "/{id}/get_by_schedule"}, method = RequestMethod.GET)
     public Map getCoursesBySchedule(@PathVariable long id) {
         HashMap<String, Object> frb = new HashMap<>();

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -55,9 +56,14 @@ public class ScheduleService {
         return schedule.getTrimester();
     }
 
-    public Set<AddedCourse> getCourses(long id) {
+    public Set<Course> getCourses(long id) {
         Schedule schedule = findOne(id);
-        return addedCourseService.findBySchedule(schedule);
+        Set<AddedCourse> addedCourses = addedCourseService.findBySchedule(schedule);
+        Set<Course> courses = new HashSet<>();
+        for (AddedCourse addedCourse : addedCourses) {
+            courses.add(addedCourse.getCourse());
+        }
+        return courses;
     }
 
     private Schedule save(Schedule schedule) {
@@ -93,9 +99,9 @@ public class ScheduleService {
         return schedule;
     }
 
-    public Schedule removeCourse(long id, Long addedCourseId) {
+    public Schedule removeCourse(long id, long addedCourseId) {
         Schedule schedule = scheduleRepository.findOne(id);
-        if (schedule != null && addedCourseId != null) {
+        if (schedule != null) {
             Set<AddedCourse> addedCourses = schedule.getAddedCourses();
             for (AddedCourse addedCourse : addedCourses) {
                 if (addedCourse.getId() == addedCourseId) {
@@ -105,13 +111,16 @@ public class ScheduleService {
             }
             schedule.setAddedCourses(addedCourses);
             schedule = save(schedule);
+            addedCourseService.archive(addedCourseId);
         }
         return schedule;
     }
 
     public void archive(long id) {
         Schedule schedule = findOne(id);
-        schedule.setActive(false);
-        save(schedule);
+        if (schedule != null) {
+            schedule.setActive(false);
+            save(schedule);
+        }
     }
 }

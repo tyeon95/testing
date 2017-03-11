@@ -66,8 +66,10 @@ public class UserGroupService {
 
     public void archive(long id) {
         UserGroup userGroup = findOne(id);
-        nullifyRelations(userGroup);
-        userGroup.setActive(false);
-        save(userGroup);
+        if (userGroup != null) {
+            nullifyRelations(userGroup);
+            userGroup.setActive(false);
+            save(userGroup);
+        }
     }
 }

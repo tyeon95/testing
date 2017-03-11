@@ -63,7 +63,7 @@ public class Schedule extends BaseEntity {
 //        this.courses = courses;
 //    }
 
-    @JsonIgnore
+//    @JsonIgnore
     public Set<AddedCourse> getAddedCourses() {
         return addedCourses;
     }

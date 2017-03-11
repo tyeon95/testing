@@ -93,16 +93,18 @@ public class UserService {
 
     private void archiveRelations(User user) {
         for (Schedule schedule : scheduleRepository.findByUser(user)) {
-            schedule.setActive(false); //TODO: CHECK THIS
+            schedule.setActive(false);
             scheduleRepository.save(schedule);
         }
     }
 
     public void archive(long id) {
         User user = findOne(id);
-        archiveRelations(user);
-        user.setActive(false);
-        save(user);
+        if (user != null) {
+            archiveRelations(user);
+            user.setActive(false);
+            save(user);
+        }
     }
 
 //    public Page<UserGroup> filter(int page, int limit, String code, String name) {

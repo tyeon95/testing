@@ -26,7 +26,6 @@ public class AddedCourse extends BaseEntity {
 
     private AddType type;
 
-    @Type(type="text")
     private AddReason reason;
 
     @ManyToOne

@@ -78,7 +78,9 @@ public class CourseService {
 
     public void archive(long id) {
         Course course = findOne(id);
-        course.setActive(false);
-        save(course);
+        if (course != null) {
+            course.setActive(false);
+            save(course);
+        }
     }
 }

@@ -80,7 +80,9 @@ public class AddedCourseService {
 
     public void archive(long id) {
         AddedCourse addedCourse = findOne(id);
-        addedCourse.setActive(false);
-        save(addedCourse);
+        if (addedCourse != null) {
+            addedCourse.setActive(false);
+            save(addedCourse);
+        }
     }
 }
