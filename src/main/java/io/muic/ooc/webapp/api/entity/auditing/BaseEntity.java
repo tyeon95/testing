@@ -15,7 +15,7 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public abstract class BaseEntity {
-    @Column(name = "created", nullable = false)
+    @Column(name = "created")//, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date created;
@@ -24,7 +24,7 @@ public abstract class BaseEntity {
     @CreatedBy
     private long createdBy;
 
-    @Column(name = "modified", nullable = false)
+    @Column(name = "modified")//, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date modified;

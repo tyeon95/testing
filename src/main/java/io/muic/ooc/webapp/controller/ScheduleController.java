@@ -57,6 +57,13 @@ public class ScheduleController {
         return frb;
     }
 
+    @RequestMapping(value = {"/{userId}/get_by_user/{trimesterId}/get_by_trimester/", "/{userId}/get_by_user/{trimesterId}/get_by_trimester"}, method = RequestMethod.GET)
+    public Map getScheduleByUserAndTrimester(@PathVariable long userId, @PathVariable long trimesterId) {
+        HashMap<String, Object> frb = new HashMap<>();
+        frb.put(Schedule.SINGULAR, scheduleService.findByUserAndTrimester(userId, trimesterId));
+        return frb;
+    }
+
     @RequestMapping(value = {"/", ""}, method = RequestMethod.POST)
     public Map createSchedule(@RequestParam(required = false) Long userId, @RequestParam(required = false) Long trimesterId) {
         HashMap<String, Object> frb = new HashMap<>();

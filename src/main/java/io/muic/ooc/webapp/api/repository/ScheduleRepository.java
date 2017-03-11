@@ -17,4 +17,6 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     Set<Schedule> findByUser(User user);
     Set<Schedule> findByUserOrderByIdDesc(User user);
     Set<Schedule> findByTrimesterOrderByIdAsc(Trimester trimester);
+
+    Schedule findByUserAndTrimester(User user, Trimester trimester);
 }

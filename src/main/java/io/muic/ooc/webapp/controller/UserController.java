@@ -1,6 +1,7 @@
 package io.muic.ooc.webapp.controller;
 
 import io.muic.ooc.webapp.api.entity.User;
+import io.muic.ooc.webapp.api.service.ScheduleService;
 import io.muic.ooc.webapp.api.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private ScheduleService scheduleService;
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public Map getUsers() {
@@ -34,12 +37,12 @@ public class UserController {
         return frb;
     }
 
-//    @RequestMapping(value = {"/{id}/get_by_schedule/}", "/{id}/get_by_schedule"}, method = RequestMethod.GET)
-//    public Map getCoursesBySchedule(@PathVariable long id) {
-//        HashMap<String, Object> frb = new HashMap<>();
-//        frb.put(Course.PLURAL, userService.getCourses(id));
-//        return frb;
-//    }
+    @RequestMapping(value = {"/{id}/get_by_schedule/}", "/{id}/get_by_schedule"}, method = RequestMethod.GET)
+    public Map getUserBySchedule(@PathVariable long id) {
+        HashMap<String, Object> frb = new HashMap<>();
+        frb.put(User.SINGULAR, scheduleService.getUser(id));
+        return frb;
+    }
 
     /* TODO: GET Users BY Course and trimester */
 

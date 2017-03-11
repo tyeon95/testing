@@ -40,13 +40,19 @@ public class UserService {
         return userRepository.findOne(id);
     }
 
+//    TODO: for finding friends?
 //    public User findByName(String name) {
 //        return userRepository.findBy(name);
 //    }
 
-    public Set<User> findByUserGroup(long id) {
-        UserGroup userGroup = userGroupRepository.findOne(id);
-        return userRepository.findByUserGroupOrderByCreatedDesc(userGroup);
+//    public Set<User> findByUserGroup(long id) {
+//        UserGroup userGroup = userGroupRepository.findOne(id);
+//        return userRepository.findByUserGroupOrderByCreatedDesc(userGroup);
+//    }
+
+    public UserGroup getUserGroup(long id) {
+        User user = findOne(id);
+        return user.getUserGroup();
     }
 
     public Set<Schedule> getSchedules(long id) {

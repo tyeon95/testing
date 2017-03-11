@@ -43,6 +43,22 @@ public class ScheduleService {
         return scheduleRepository.findOne(id);
     }
 
+    public Schedule findByUserAndTrimester(long userId, long trimesterId) {
+        User user = userRepository.findOne(userId);
+        Trimester trimester = trimesterRepository.findOne(trimesterId);
+        return scheduleRepository.findByUserAndTrimester(user, trimester);
+    }
+
+    public User getUser(long id) {
+        Schedule schedule = findOne(id);
+        return schedule.getUser();
+    }
+
+    public Trimester getTrimester(long id) {
+        Schedule schedule = findOne(id);
+        return schedule.getTrimester();
+    }
+
     public Set<Course> getCourses(long id) {
         Schedule schedule = findOne(id);
         return courseRepository.findBySchedules(schedule);
@@ -71,6 +87,7 @@ public class ScheduleService {
             if (course != null) {
                 Set<Course> courses = schedule.getCourses();
                 courses.add(course);
+                schedule.setCourses(courses);
             }
             schedule = save(schedule);
         }
@@ -87,6 +104,7 @@ public class ScheduleService {
                     break;
                 }
             }
+            schedule.setCourses(courses);
             schedule = save(schedule);
         }
         return schedule;

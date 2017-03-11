@@ -23,10 +23,8 @@ public class Trimester extends BaseEntity {
     @GeneratedValue
     private long id;
 
-    @ManyToMany
-    @JoinTable(name="join_course_trimester",
-            joinColumns=@JoinColumn(name="course_id", referencedColumnName="id"),
-            inverseJoinColumns=@JoinColumn(name="trimester_id", referencedColumnName="id"))
+    @ManyToMany(cascade= CascadeType.ALL, mappedBy="trimesters")
+    @OrderBy(value="created")
     private Set<Course> courses = new HashSet<>();
 
     private int year;

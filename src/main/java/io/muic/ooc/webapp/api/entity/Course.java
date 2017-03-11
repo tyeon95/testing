@@ -33,8 +33,10 @@ public class Course extends BaseEntity {
 
     private int capacity;
 
-    @ManyToMany(cascade= CascadeType.ALL, mappedBy="courses")
-    @OrderBy(value="created")
+    @ManyToMany
+    @JoinTable(name="join_course_trimester",
+            joinColumns=@JoinColumn(name="course_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="trimester_id", referencedColumnName="id"))
     private Set<Trimester> trimesters = new HashSet<>();
 
     @ManyToMany(cascade= CascadeType.ALL, mappedBy="courses")

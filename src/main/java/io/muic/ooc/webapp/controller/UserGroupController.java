@@ -1,7 +1,9 @@
 package io.muic.ooc.webapp.controller;
 
+import io.muic.ooc.webapp.api.entity.User;
 import io.muic.ooc.webapp.api.entity.UserGroup;
 import io.muic.ooc.webapp.api.service.UserGroupService;
+import io.muic.ooc.webapp.api.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,8 @@ import java.util.Map;
 public class UserGroupController {
     @Autowired
     private UserGroupService userGroupService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public Map getUserGroups() {
@@ -31,6 +35,13 @@ public class UserGroupController {
     public Map getUserGroup(@PathVariable long id) {
         HashMap<String, Object> frb = new HashMap<>();
         frb.put(UserGroup.SINGULAR, userGroupService.findOne(id));
+        return frb;
+    }
+
+    @RequestMapping(value = {"/{id}/get_by_user/}", "/{id}/get_by_user"}, method = RequestMethod.GET)
+    public Map getUserGroupByUser(@PathVariable long id) {
+        HashMap<String, Object> frb = new HashMap<>();
+        frb.put(User.SINGULAR, userService.getUserGroup(id));
         return frb;
     }
 

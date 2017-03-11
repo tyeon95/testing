@@ -39,6 +39,10 @@ public class TrimesterService {
         return trimesterRepository.findOne(id);
     }
 
+    public Trimester getLatestTrimester() {
+        return trimesterRepository.findTopByOrderByYearDescTrimesterDesc();
+    }
+
     public Set<Course> getCourses(long id) {
         Trimester trimester = findOne(id);
         return courseRepository.findByTrimesters(trimester);
@@ -57,10 +61,18 @@ public class TrimesterService {
         return trimesterRepository.save(trimester);
     }
 
+    private Trimester exists(int trimester, int year) {
+        return trimesterRepository.findByTrimesterAndYear(trimester, year);
+    }
+
     public Trimester create(int trimester, int year) {
-        Trimester tri = new Trimester();
-        tri.setTrimester(trimester);
-        tri.setYear(year);
+        if (trimester > 4) return null;
+        Trimester tri = exists(trimester, year);
+        if (tri == null) {
+            tri = new Trimester();
+            tri.setTrimester(trimester);
+            tri.setYear(year);
+        }
         return save(tri);
     }
 }

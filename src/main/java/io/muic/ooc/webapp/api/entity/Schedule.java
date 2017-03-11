@@ -29,8 +29,8 @@ public class Schedule extends BaseEntity {
 
     @ManyToMany
     @JoinTable(name="join_course_schedule",
-            joinColumns=@JoinColumn(name="course_id", referencedColumnName="id"),
-            inverseJoinColumns=@JoinColumn(name="schedule_id", referencedColumnName="id"))
+            joinColumns=@JoinColumn(name="schedule_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="course_id", referencedColumnName="id"))
     private Set<Course> courses = new HashSet<>();
 
     @ManyToOne

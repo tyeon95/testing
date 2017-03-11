@@ -1,6 +1,7 @@
 package io.muic.ooc.webapp.controller;
 
 import io.muic.ooc.webapp.api.entity.Trimester;
+import io.muic.ooc.webapp.api.service.ScheduleService;
 import io.muic.ooc.webapp.api.service.TrimesterService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.Map;
 public class TrimesterController {
     @Autowired
     private TrimesterService trimesterService;
+    @Autowired
+    private ScheduleService scheduleService;
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public Map getTrimesters() {
@@ -31,6 +34,20 @@ public class TrimesterController {
     public Map getTrimester(@PathVariable long id) {
         HashMap<String, Object> frb = new HashMap<>();
         frb.put(Trimester.SINGULAR, trimesterService.findOne(id));
+        return frb;
+    }
+
+    @RequestMapping(value = {"/get_latest/", "/get_latest"}, method = RequestMethod.GET)
+    public Map getLatestTrimester() {
+        HashMap<String, Object> frb = new HashMap<>();
+        frb.put(Trimester.SINGULAR, trimesterService.getLatestTrimester());
+        return frb;
+    }
+
+    @RequestMapping(value = {"/{id}/get_by_schedule/", "/{id}/get_by_schedule"}, method = RequestMethod.GET)
+    public Map getTrimesterBySchedule(@PathVariable long id) {
+        HashMap<String, Object> frb = new HashMap<>();
+        frb.put(Trimester.SINGULAR, scheduleService.getTrimester(id));
         return frb;
     }
 
