@@ -1,17 +1,18 @@
 package io.muic.ooc.webapp.api.repository;
 
+import io.muic.ooc.webapp.api.entity.AddedCourse;
 import io.muic.ooc.webapp.api.entity.Course;
 import io.muic.ooc.webapp.api.entity.Schedule;
-import io.muic.ooc.webapp.api.entity.Trimester;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.Set;
 
 /**
- * Created by tyeon on 3/7/17.
+ * Created by tyeon on 3/11/17.
  */
 @RepositoryRestResource(exported = false)
-public interface CourseRepository extends JpaRepository<Course, Long> {
-    Set<Course> findByTrimesters(Trimester trimester);
+public interface AddedCourseRepository extends JpaRepository<AddedCourse, Long> {
+    Set<AddedCourse> findBySchedule(Schedule schedule);
+    AddedCourse findByScheduleAndCourse(Schedule schedule, Course course);
 }

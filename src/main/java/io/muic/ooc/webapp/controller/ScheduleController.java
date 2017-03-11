@@ -73,9 +73,10 @@ public class ScheduleController {
     }
 
     @RequestMapping(value = {"/{id}/add_course/", "/{id}/add_course"}, method = RequestMethod.POST)
-    public Map addCourseToSchedule(@PathVariable long id, @RequestParam(required = false) Long courseId) {
+    public Map addCourseToSchedule(@PathVariable long id, @RequestParam(required = false) Long courseId,
+                                   @RequestParam(required = false) String type, @RequestParam(required = false) String reason) {
         HashMap<String, Object> frb = new HashMap<>();
-        Schedule schedule = scheduleService.addCourse(id, courseId);
+        Schedule schedule = scheduleService.addOrUpdateCourse(id, courseId, type.toUpperCase(), reason.toUpperCase());
         frb.put(Schedule.SINGULAR, schedule);
         return frb;
     }

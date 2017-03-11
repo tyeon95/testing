@@ -39,9 +39,9 @@ public class Course extends BaseEntity {
             inverseJoinColumns=@JoinColumn(name="trimester_id", referencedColumnName="id"))
     private Set<Trimester> trimesters = new HashSet<>();
 
-    @ManyToMany(cascade= CascadeType.ALL, mappedBy="courses")
-    @OrderBy(value="created")
-    private Set<Schedule> schedules = new HashSet<>();
+//    @ManyToMany(cascade= CascadeType.ALL, mappedBy="courses")
+//    @OrderBy(value="created")
+//    private Set<Schedule> schedules = new HashSet<>();
 
     public long getId() {
         return id;
@@ -88,12 +88,12 @@ public class Course extends BaseEntity {
         this.trimesters = trimesters;
     }
 
-    @JsonIgnore
-    public Set<Schedule> getSchedules() {
-        return schedules;
-    }
-
-    public void setSchedules(Set<Schedule> schedules) {
-        this.schedules = schedules;
-    }
+//    @JsonIgnore
+//    public Set<Schedule> getSchedules() {
+//        return schedules;
+//    }
+//
+//    public void setSchedules(Set<Schedule> schedules) {
+//        this.schedules = schedules;
+//    }
 }

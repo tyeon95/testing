@@ -1,13 +1,7 @@
 package io.muic.ooc.webapp.api.service;
 
-import io.muic.ooc.webapp.api.entity.Course;
-import io.muic.ooc.webapp.api.entity.Schedule;
-import io.muic.ooc.webapp.api.entity.Trimester;
-import io.muic.ooc.webapp.api.entity.User;
-import io.muic.ooc.webapp.api.repository.CourseRepository;
-import io.muic.ooc.webapp.api.repository.ScheduleRepository;
-import io.muic.ooc.webapp.api.repository.TrimesterRepository;
-import io.muic.ooc.webapp.api.repository.UserRepository;
+import io.muic.ooc.webapp.api.entity.*;
+import io.muic.ooc.webapp.api.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +24,8 @@ public class ScheduleService {
     private CourseRepository courseRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AddedCourseService addedCourseService;
 
     public long count() {
         return scheduleRepository.count();
@@ -59,9 +55,9 @@ public class ScheduleService {
         return schedule.getTrimester();
     }
 
-    public Set<Course> getCourses(long id) {
+    public Set<AddedCourse> getCourses(long id) {
         Schedule schedule = findOne(id);
-        return courseRepository.findBySchedules(schedule);
+        return addedCourseService.findBySchedule(schedule);
     }
 
     private Schedule save(Schedule schedule) {
@@ -80,31 +76,34 @@ public class ScheduleService {
         return schedule;
     }
 
-    public Schedule addCourse(long id, Long courseId) {
+    public Schedule addOrUpdateCourse(long id, Long courseId, String type, String reason) {
         Schedule schedule = scheduleRepository.findOne(id);
-        if (schedule != null && courseId != null) {
-            Course course = courseRepository.findOne(courseId);
-            if (course != null) {
-                Set<Course> courses = schedule.getCourses();
-                courses.add(course);
-                schedule.setCourses(courses);
+        Course course = courseRepository.findOne(courseId);
+        if (schedule != null && course != null) {
+            AddedCourse addedCourse = addedCourseService.findByScheduleAndCourse(id, courseId);
+            if (addedCourse != null) addedCourseService.update(addedCourse.getId(), type, reason);
+            else {
+                addedCourse = addedCourseService.create(type, reason, schedule.getId(), course.getId());
+                Set<AddedCourse> addedCourses = schedule.getAddedCourses();
+                addedCourses.add(addedCourse);
+                schedule.setAddedCourses(addedCourses);
+                schedule = save(schedule);
             }
-            schedule = save(schedule);
         }
         return schedule;
     }
 
-    public Schedule removeCourse(long id, Long courseId) {
+    public Schedule removeCourse(long id, Long addedCourseId) {
         Schedule schedule = scheduleRepository.findOne(id);
-        if (schedule != null && courseId != null) {
-            Set<Course> courses = schedule.getCourses();
-            for (Course course : courses) {
-                if (course.getId() == courseId) {
-                    courses.remove(course);
+        if (schedule != null && addedCourseId != null) {
+            Set<AddedCourse> addedCourses = schedule.getAddedCourses();
+            for (AddedCourse addedCourse : addedCourses) {
+                if (addedCourse.getId() == addedCourseId) {
+                    addedCourses.remove(addedCourse);
                     break;
                 }
             }
-            schedule.setCourses(courses);
+            schedule.setAddedCourses(addedCourses);
             schedule = save(schedule);
         }
         return schedule;

@@ -27,11 +27,15 @@ public class Schedule extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToMany
-    @JoinTable(name="join_course_schedule",
-            joinColumns=@JoinColumn(name="schedule_id", referencedColumnName="id"),
-            inverseJoinColumns=@JoinColumn(name="course_id", referencedColumnName="id"))
-    private Set<Course> courses = new HashSet<>();
+//    @ManyToMany
+//    @JoinTable(name="join_course_schedule",
+//            joinColumns=@JoinColumn(name="schedule_id", referencedColumnName="id"),
+//            inverseJoinColumns=@JoinColumn(name="course_id", referencedColumnName="id"))
+//    private Set<Course> courses = new HashSet<>();
+
+    @OneToMany
+    @JoinColumn(name = "added_courses")
+    private Set<AddedCourse> addedCourses = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "trimester")
@@ -50,13 +54,22 @@ public class Schedule extends BaseEntity {
         this.user = user;
     }
 
+//    @JsonIgnore
+//    public Set<Course> getCourses() {
+//        return courses;
+//    }
+//
+//    public void setCourses(Set<Course> courses) {
+//        this.courses = courses;
+//    }
+
     @JsonIgnore
-    public Set<Course> getCourses() {
-        return courses;
+    public Set<AddedCourse> getAddedCourses() {
+        return addedCourses;
     }
 
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
+    public void setAddedCourses(Set<AddedCourse> addedCourses) {
+        this.addedCourses = addedCourses;
     }
 
     @JsonIgnore

@@ -50,7 +50,7 @@ public class UserGroupController {
         HashMap<String, Object> frb = new HashMap<>();
         UserGroup userGroup = null;
         if (!StringUtils.isBlank(role)) {
-            userGroup = userGroupService.create(role, description);
+            userGroup = userGroupService.create(role.toUpperCase(), description);
         }
         frb.put(UserGroup.SINGULAR, userGroup);
         return frb;
@@ -62,7 +62,7 @@ public class UserGroupController {
         HashMap<String, Object> frb = new HashMap<>();
         UserGroup userGroup = null;
         if (!StringUtils.isBlank(role)) {
-            userGroup = userGroupService.update(id, role, description);
+            userGroup = userGroupService.update(id, role.toUpperCase(), description);
         }
         frb.put(UserGroup.SINGULAR, userGroup);
         return frb;

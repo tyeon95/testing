@@ -65,8 +65,8 @@ public class UserGroup extends BaseEntity {
     }
 
     public enum RoleType {
-        STUDENT,
+        ADMIN,
         PROFESSOR,
-        ADMIN
+        STUDENT,
     }
 }
