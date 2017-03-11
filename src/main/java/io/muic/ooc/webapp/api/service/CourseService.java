@@ -73,8 +73,9 @@ public class CourseService {
         course.setTime(time);
         course.setCapacity(capacity);
         setTrimesters(course, trimesterId);
+        course = save(course);
         activityLogger.log(ActivityType.ADDED.toString(), course.getId(), trimesterId, course.toString(), new Date());
-        return save(course);
+        return course;
     }
 
     public Course update(long id, String code, String name, String time, int capacity, Long trimesterId) {
@@ -95,7 +96,7 @@ public class CourseService {
         Course course = findOne(id);
         if (course != null) {
             course.setActive(false);
-            save(course);
+            course = save(course);
             activityLogger.log(ActivityType.REMOVED.toString(), course.getId(), 0L, course.toString(), new Date());
         }
     }

@@ -134,7 +134,7 @@ public class ScheduleService {
         Schedule schedule = findOne(id);
         if (schedule != null) {
             schedule.setActive(false);
-            save(schedule);
+            schedule = save(schedule);
             activityLogger.log(ActivityType.REMOVED.toString(), schedule.getId(), schedule.getUser().getId(), schedule.toString(), new Date());
         }
     }

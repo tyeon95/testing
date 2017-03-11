@@ -90,7 +90,7 @@ public class AddedCourseService {
         AddedCourse addedCourse = findOne(id);
         if (addedCourse != null) {
             addedCourse.setActive(false);
-            save(addedCourse);
+            addedCourse = save(addedCourse);
             activityLogger.log(ActivityType.REMOVED.toString(), addedCourse.getSchedule().getId(), addedCourse.getCourse().getId(),
                     addedCourse.toString(), new Date());
         }
