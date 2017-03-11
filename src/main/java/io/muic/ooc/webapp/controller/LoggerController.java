@@ -31,4 +31,6 @@ public class LoggerController {
         frb.put(ActivityLogger.PLURAL, courses);
         return frb;
     }
+
+    //TODO: GET ACTIVITY LOGGER FOR ADDCOURSES AND SCHEDULE
 }

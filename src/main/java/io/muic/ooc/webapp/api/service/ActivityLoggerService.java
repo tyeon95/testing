@@ -29,6 +29,6 @@ public class ActivityLoggerService {
 
 //    TODO: GET COURSE ACTIVITY BY ID DESC
     public Set<CourseActivity> getCourseActivity() {
-        return courseActivityRepository.findAllOrderByIdDesc();
+        return courseActivityRepository.findTop20ByOrderByIdDesc();
     }
 }

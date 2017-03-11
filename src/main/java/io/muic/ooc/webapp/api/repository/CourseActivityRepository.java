@@ -11,5 +11,5 @@ import java.util.Set;
  */
 @RepositoryRestResource(exported = false)
 public interface CourseActivityRepository extends JpaRepository<CourseActivity, Long> {
-    Set<CourseActivity> findAllOrderByIdDesc();
+    Set<CourseActivity> findTop20ByOrderByIdDesc();
 }
