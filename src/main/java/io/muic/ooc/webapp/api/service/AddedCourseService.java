@@ -1,16 +1,12 @@
 package io.muic.ooc.webapp.api.service;
 
-import io.muic.ooc.webapp.api.entity.AddedCourse;
-import io.muic.ooc.webapp.api.entity.Course;
-import io.muic.ooc.webapp.api.entity.Schedule;
-import io.muic.ooc.webapp.api.entity.Trimester;
-import io.muic.ooc.webapp.api.repository.AddedCourseRepository;
-import io.muic.ooc.webapp.api.repository.CourseRepository;
-import io.muic.ooc.webapp.api.repository.ScheduleRepository;
-import io.muic.ooc.webapp.api.repository.TrimesterRepository;
+import io.muic.ooc.webapp.api.ActivityLogger;
+import io.muic.ooc.webapp.api.entity.*;
+import io.muic.ooc.webapp.api.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +23,13 @@ public class AddedCourseService {
     private CourseRepository courseRepository;
     @Autowired
     private ScheduleRepository scheduleRepository;
+    @Autowired
+    private AddedCourseActivityRepository addedCourseActivityRepository;
+    private ActivityLogger activityLogger;
+    @PostConstruct
+    private void setActivityLogger() {
+        activityLogger = new ActivityLogger(AddedCourseActivity.class, addedCourseActivityRepository);
+    }
 
     public long count() {
         return addedCourseRepository.count();

@@ -1,13 +1,17 @@
 package io.muic.ooc.webapp.api.service;
 
+import io.muic.ooc.webapp.api.ActivityLogger;
 import io.muic.ooc.webapp.api.entity.Course;
+import io.muic.ooc.webapp.api.entity.CourseActivity;
 import io.muic.ooc.webapp.api.entity.Schedule;
 import io.muic.ooc.webapp.api.entity.Trimester;
+import io.muic.ooc.webapp.api.repository.CourseActivityRepository;
 import io.muic.ooc.webapp.api.repository.CourseRepository;
 import io.muic.ooc.webapp.api.repository.TrimesterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +28,13 @@ public class CourseService {
     private CourseRepository courseRepository;
     @Autowired
     private TrimesterRepository trimesterRepository;
+    @Autowired
+    private CourseActivityRepository courseActivityRepository;
+    private ActivityLogger activityLogger;
+    @PostConstruct
+    private void setActivityLogger() {
+        activityLogger = new ActivityLogger(CourseActivity.class, courseActivityRepository);
+    }
 
     public long count() {
         return courseRepository.count();
