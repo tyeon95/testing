@@ -101,6 +101,6 @@ public class Course extends BaseEntity {
     public String toString() {
         return String.format(
             "Course[id=%d, code='%s', name='%s', time='%s', capacity=%d]",
-            id, code, name, capacity);
+            id, code, name, time, capacity);
     }
 }

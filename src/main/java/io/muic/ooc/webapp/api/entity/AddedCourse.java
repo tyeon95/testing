@@ -88,7 +88,7 @@ public class AddedCourse extends BaseEntity {
     @Override
     public String toString() {
         return String.format(
-            "Course[id=%d, schedule=%d, course=%s, type='%s', reason='%s']",
+            "Course[id=%d, schedule=%d, course=%d, type='%s', reason='%s']",
             id, schedule.getId(), course.getId(), type.toString(), reason.toString());
     }
 }

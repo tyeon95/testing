@@ -13,7 +13,7 @@ import java.util.Date;
 @MappedSuperclass
 public abstract class BaseActivityLog {
     /* TODO: EDIT THIS */
-    @Column(name = "created", nullable = false)
+    @Column(name = "created")
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date created;
