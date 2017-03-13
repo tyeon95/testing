@@ -1,6 +1,7 @@
 package io.muic.ooc.webapp.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.muic.ooc.webapp.api.entity.course.Course;
 import io.muic.ooc.webapp.api.entity.auditing.BaseEntity;
 import org.hibernate.annotations.Where;
 

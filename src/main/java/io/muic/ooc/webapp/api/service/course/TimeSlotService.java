@@ -1,10 +1,10 @@
-package io.muic.ooc.webapp.api.service;
+package io.muic.ooc.webapp.api.service.course;
 
-import io.muic.ooc.webapp.api.entity.Course;
-import io.muic.ooc.webapp.api.entity.Slot;
-import io.muic.ooc.webapp.api.entity.TimeSlot;
-import io.muic.ooc.webapp.api.repository.SlotRepository;
-import io.muic.ooc.webapp.api.repository.TimeSlotRepository;
+import io.muic.ooc.webapp.api.entity.course.Course;
+import io.muic.ooc.webapp.api.entity.course.Slot;
+import io.muic.ooc.webapp.api.entity.course.TimeSlot;
+import io.muic.ooc.webapp.api.repository.course.SlotRepository;
+import io.muic.ooc.webapp.api.repository.course.TimeSlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

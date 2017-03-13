@@ -1,13 +1,12 @@
-package io.muic.ooc.webapp.api.service;
+package io.muic.ooc.webapp.api.service.course;
 
-import io.muic.ooc.webapp.api.entity.Slot;
-import io.muic.ooc.webapp.api.repository.SlotRepository;
+import io.muic.ooc.webapp.api.entity.course.Slot;
+import io.muic.ooc.webapp.api.repository.course.SlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by tyeon on 3/13/17.
@@ -17,6 +16,9 @@ import java.util.Set;
 public class SlotService {
     @Autowired
     private SlotRepository slotRepository;
+
+    //TODO: initialise on startup
+    //for each day, 7-19
 
     public long count() {
         return slotRepository.count();

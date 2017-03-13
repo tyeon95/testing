@@ -1,9 +1,15 @@
-package io.muic.ooc.webapp.api.service;
+package io.muic.ooc.webapp.api.service.schedule;
 
 import io.muic.ooc.webapp.api.ActivityLogger;
 import io.muic.ooc.webapp.api.ActivityType;
-import io.muic.ooc.webapp.api.entity.*;
-import io.muic.ooc.webapp.api.repository.*;
+import io.muic.ooc.webapp.api.entity.course.Course;
+import io.muic.ooc.webapp.api.entity.schedule.AddedCourse;
+import io.muic.ooc.webapp.api.entity.schedule.AddedCourseActivity;
+import io.muic.ooc.webapp.api.entity.schedule.Schedule;
+import io.muic.ooc.webapp.api.repository.course.CourseRepository;
+import io.muic.ooc.webapp.api.repository.schedule.AddedCourseActivityRepository;
+import io.muic.ooc.webapp.api.repository.schedule.AddedCourseRepository;
+import io.muic.ooc.webapp.api.repository.schedule.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

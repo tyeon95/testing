@@ -1,4 +1,4 @@
-package io.muic.ooc.webapp.api.entity;
+package io.muic.ooc.webapp.api.entity.schedule;
 
 import io.muic.ooc.webapp.api.entity.auditing.BaseActivityLog;
 

@@ -1,7 +1,6 @@
-package io.muic.ooc.webapp.api.repository;
+package io.muic.ooc.webapp.api.repository.course;
 
-import io.muic.ooc.webapp.api.entity.Course;
-import io.muic.ooc.webapp.api.entity.Schedule;
+import io.muic.ooc.webapp.api.entity.course.Course;
 import io.muic.ooc.webapp.api.entity.Trimester;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

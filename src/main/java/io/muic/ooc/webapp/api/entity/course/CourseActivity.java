@@ -1,4 +1,4 @@
-package io.muic.ooc.webapp.api.entity;
+package io.muic.ooc.webapp.api.entity.course;
 
 import io.muic.ooc.webapp.api.entity.auditing.BaseActivityLog;
 
@@ -7,10 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * Created by tyeon on 3/7/17.
+ * Created by tyeon on 3/11/17.
  */
 @Entity
-public class ScheduleActivity extends BaseActivityLog {
+public class CourseActivity extends BaseActivityLog {
     @Id
     @GeneratedValue
     private long id;

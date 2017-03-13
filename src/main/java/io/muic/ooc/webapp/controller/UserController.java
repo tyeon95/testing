@@ -1,7 +1,7 @@
 package io.muic.ooc.webapp.controller;
 
 import io.muic.ooc.webapp.api.entity.User;
-import io.muic.ooc.webapp.api.service.ScheduleService;
+import io.muic.ooc.webapp.api.service.schedule.ScheduleService;
 import io.muic.ooc.webapp.api.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

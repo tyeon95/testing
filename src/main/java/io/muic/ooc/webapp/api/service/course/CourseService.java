@@ -1,19 +1,20 @@
-package io.muic.ooc.webapp.api.service;
+package io.muic.ooc.webapp.api.service.course;
 
 import io.muic.ooc.webapp.api.ActivityLogger;
 import io.muic.ooc.webapp.api.ActivityType;
 import io.muic.ooc.webapp.api.entity.*;
-import io.muic.ooc.webapp.api.repository.CourseActivityRepository;
-import io.muic.ooc.webapp.api.repository.CourseRepository;
+import io.muic.ooc.webapp.api.entity.course.Course;
+import io.muic.ooc.webapp.api.entity.course.CourseActivity;
+import io.muic.ooc.webapp.api.entity.course.TimeSlot;
+import io.muic.ooc.webapp.api.repository.course.CourseActivityRepository;
+import io.muic.ooc.webapp.api.repository.course.CourseRepository;
 import io.muic.ooc.webapp.api.repository.TrimesterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
-import java.sql.Time;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 

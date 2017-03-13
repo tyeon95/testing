@@ -1,6 +1,7 @@
-package io.muic.ooc.webapp.api.entity;
+package io.muic.ooc.webapp.api.entity.course;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.muic.ooc.webapp.api.entity.Trimester;
 import io.muic.ooc.webapp.api.entity.auditing.BaseEntity;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;

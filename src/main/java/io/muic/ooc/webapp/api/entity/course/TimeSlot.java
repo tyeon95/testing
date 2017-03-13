@@ -1,4 +1,4 @@
-package io.muic.ooc.webapp.api.entity;
+package io.muic.ooc.webapp.api.entity.course;
 
 import io.muic.ooc.webapp.api.entity.auditing.BaseEntity;
 import org.hibernate.annotations.Where;

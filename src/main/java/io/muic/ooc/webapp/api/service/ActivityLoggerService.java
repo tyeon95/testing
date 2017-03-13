@@ -1,12 +1,10 @@
 package io.muic.ooc.webapp.api.service;
 
-import io.muic.ooc.webapp.api.entity.CourseActivity;
-import io.muic.ooc.webapp.api.entity.FollowActivity;
-import io.muic.ooc.webapp.api.entity.Trimester;
-import io.muic.ooc.webapp.api.repository.AddedCourseActivityRepository;
-import io.muic.ooc.webapp.api.repository.CourseActivityRepository;
+import io.muic.ooc.webapp.api.entity.course.CourseActivity;
+import io.muic.ooc.webapp.api.repository.schedule.AddedCourseActivityRepository;
+import io.muic.ooc.webapp.api.repository.course.CourseActivityRepository;
 import io.muic.ooc.webapp.api.repository.FollowActivityRepository;
-import io.muic.ooc.webapp.api.repository.ScheduleActivityRepository;
+import io.muic.ooc.webapp.api.repository.schedule.ScheduleActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

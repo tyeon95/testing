@@ -1,13 +1,11 @@
-package io.muic.ooc.webapp.api.entity;
+package io.muic.ooc.webapp.api.entity.schedule;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.muic.ooc.webapp.api.entity.course.Course;
 import io.muic.ooc.webapp.api.entity.auditing.BaseEntity;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by tyeon on 3/11/17.

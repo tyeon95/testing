@@ -1,16 +1,14 @@
 package io.muic.ooc.webapp.api.service;
 
 import io.muic.ooc.webapp.api.entity.Follow;
-import io.muic.ooc.webapp.api.entity.Schedule;
+import io.muic.ooc.webapp.api.entity.schedule.Schedule;
 import io.muic.ooc.webapp.api.entity.User;
 import io.muic.ooc.webapp.api.entity.UserGroup;
 import io.muic.ooc.webapp.api.repository.FollowRepository;
-import io.muic.ooc.webapp.api.repository.ScheduleRepository;
+import io.muic.ooc.webapp.api.repository.schedule.ScheduleRepository;
 import io.muic.ooc.webapp.api.repository.UserGroupRepository;
 import io.muic.ooc.webapp.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

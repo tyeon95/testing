@@ -1,6 +1,4 @@
-package io.muic.ooc.webapp.api.entity;
-
-import org.hibernate.annotations.Where;
+package io.muic.ooc.webapp.api.entity.course;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
