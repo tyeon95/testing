@@ -32,5 +32,5 @@ public class LoggerController {
         return frb;
     }
 
-    //TODO: GET ACTIVITY LOGGER FOR ADDCOURSES AND SCHEDULE
+    //TODO: GET ACTIVITY LOGGER FOR ADDCOURSES AND SCHEDULE AND FOLLOW
 }

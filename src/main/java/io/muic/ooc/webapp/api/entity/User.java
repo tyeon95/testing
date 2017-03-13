@@ -10,6 +10,8 @@ import io.muic.ooc.webapp.api.entity.auditing.BaseEntity;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -39,6 +41,14 @@ public class User extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_group")
     private UserGroup userGroup;
+
+    @OneToOne
+    @JoinColumn(name = "user")
+    private Follow follow;
+
+//    @ManyToOne
+//    @JoinColumn(name = "followed_by")
+//    Set<Follow> followedBy = new HashSet<>();
 
     public long getId() {
         return id;
@@ -84,4 +94,21 @@ public class User extends BaseEntity {
     public void setUserGroup(UserGroup userGroup) {
         this.userGroup = userGroup;
     }
+
+    public Follow getFollow() {
+        return follow;
+    }
+
+    public void setFollow(Follow follow) {
+        this.follow = follow;
+    }
+
+//    @JsonIgnore
+//    public Set<Follow> getFollowedBy() {
+//        return followedBy;
+//    }
+//
+//    public void setFollowedBy(Set<Follow> followed) {
+//        this.followedBy = followed;
+//    }
 }

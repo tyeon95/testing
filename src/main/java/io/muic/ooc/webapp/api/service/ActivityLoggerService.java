@@ -1,9 +1,11 @@
 package io.muic.ooc.webapp.api.service;
 
 import io.muic.ooc.webapp.api.entity.CourseActivity;
+import io.muic.ooc.webapp.api.entity.FollowActivity;
 import io.muic.ooc.webapp.api.entity.Trimester;
 import io.muic.ooc.webapp.api.repository.AddedCourseActivityRepository;
 import io.muic.ooc.webapp.api.repository.CourseActivityRepository;
+import io.muic.ooc.webapp.api.repository.FollowActivityRepository;
 import io.muic.ooc.webapp.api.repository.ScheduleActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,12 +25,17 @@ public class ActivityLoggerService {
     private CourseActivityRepository courseActivityRepository;
     @Autowired
     private AddedCourseActivityRepository addedCourseActivityRepository;
+    @Autowired
+    private FollowActivityRepository followActivityRepository;
 
 //    TODO: GET SCHEDULE AND ADDCOURSE ACTIVITY LOG BY USER (friends)
 
 
-//    TODO: GET COURSE ACTIVITY BY ID DESC
     public Set<CourseActivity> getCourseActivity() {
         return courseActivityRepository.findTop20ByOrderByIdDesc();
     }
+//  TODO: GET FOLLOW ACTIVITY BY USER (friends)
+//    public Set<FollowActivity> getFollowActivity() {
+//        return followActivityRepository.findBy
+//    }
 }

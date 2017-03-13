@@ -1,8 +1,10 @@
 package io.muic.ooc.webapp.api.service;
 
+import io.muic.ooc.webapp.api.entity.Follow;
 import io.muic.ooc.webapp.api.entity.Schedule;
 import io.muic.ooc.webapp.api.entity.User;
 import io.muic.ooc.webapp.api.entity.UserGroup;
+import io.muic.ooc.webapp.api.repository.FollowRepository;
 import io.muic.ooc.webapp.api.repository.ScheduleRepository;
 import io.muic.ooc.webapp.api.repository.UserGroupRepository;
 import io.muic.ooc.webapp.api.repository.UserRepository;
@@ -27,6 +29,10 @@ public class UserService {
     private UserGroupRepository userGroupRepository;
     @Autowired
     private ScheduleRepository scheduleRepository;
+    @Autowired
+    private FollowService followService;
+    @Autowired
+    private FollowRepository followRepository;
 
     public long count() {
         return userRepository.count();
@@ -60,6 +66,11 @@ public class UserService {
         return scheduleRepository.findByUserOrderByIdDesc(user);
     }
 
+    public Follow getFollowing(long id) {
+        User user = findOne(id);
+        return followRepository.findByUser(user);
+    }
+
     private User save(User user) {
         return userRepository.save(user);
     }
@@ -74,6 +85,9 @@ public class UserService {
             user.setLastname(lastname);
             user.setUserGroup(userGroup);
             user.setHashedPassword(hashedPassword);
+            //create follow
+            Follow follow = followService.create(user);
+            user.setFollow(follow);
         }
         return save(user);
     }
