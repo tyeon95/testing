@@ -2,10 +2,7 @@ package io.muic.ooc.webapp.api.service;
 
 import io.muic.ooc.webapp.api.ActivityLogger;
 import io.muic.ooc.webapp.api.ActivityType;
-import io.muic.ooc.webapp.api.entity.Course;
-import io.muic.ooc.webapp.api.entity.CourseActivity;
-import io.muic.ooc.webapp.api.entity.Schedule;
-import io.muic.ooc.webapp.api.entity.Trimester;
+import io.muic.ooc.webapp.api.entity.*;
 import io.muic.ooc.webapp.api.repository.CourseActivityRepository;
 import io.muic.ooc.webapp.api.repository.CourseRepository;
 import io.muic.ooc.webapp.api.repository.TrimesterRepository;
@@ -14,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
+import java.sql.Time;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -30,6 +28,8 @@ public class CourseService {
     private CourseRepository courseRepository;
     @Autowired
     private TrimesterRepository trimesterRepository;
+    @Autowired
+    private TimeSlotService timeSlotService;
     @Autowired
     private CourseActivityRepository courseActivityRepository;
     private ActivityLogger activityLogger;
@@ -66,7 +66,7 @@ public class CourseService {
         return course;
     }
 
-    public Course create(String code, String name, String time, int capacity, Long trimesterId) {
+    public Course create(String code, String name, String time, int capacity, Long trimesterId, List<Long> slotIds) {
         Course course = new Course();
         course.setCode(code);
         course.setName(name);
@@ -74,11 +74,14 @@ public class CourseService {
         course.setCapacity(capacity);
         setTrimesters(course, trimesterId);
         course = save(course);
+        TimeSlot timeSlot = timeSlotService.create(course, slotIds);
+        course.setTimeSlot(timeSlot);
+        course = save(course);
         activityLogger.log(ActivityType.ADDED.toString(), course.getId(), trimesterId, course.toString(), new Date());
         return course;
     }
 
-    public Course update(long id, String code, String name, String time, int capacity, Long trimesterId) {
+    public Course update(long id, String code, String name, String time, int capacity, Long trimesterId, List<Long> slotIds) {
         Course course = findOne(id);
         if (course != null) {
             course.setCode(code);
@@ -86,16 +89,25 @@ public class CourseService {
             course.setTime(time);
             course.setCapacity(capacity);
             setTrimesters(course, trimesterId);
+            TimeSlot timeSlot = timeSlotService.update(slotIds);
+            course.setTimeSlot(timeSlot);
             course = save(course);
             activityLogger.log(ActivityType.UPDATED.toString(), course.getId(), trimesterId, course.toString(), new Date());
         }
         return course;
     }
 
+    private void nullifyRelations(Course course) {
+        TimeSlot timeSlot = course.getTimeSlot();
+        timeSlot.setActive(false);
+        timeSlotService.archive(timeSlot.getId());
+    }
+
     public void archive(long id) {
         Course course = findOne(id);
         if (course != null) {
             course.setActive(false);
+            nullifyRelations(course);
             course = save(course);
             activityLogger.log(ActivityType.REMOVED.toString(), course.getId(), 0L, course.toString(), new Date());
         }

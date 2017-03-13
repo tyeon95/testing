@@ -43,6 +43,10 @@ public class Course extends BaseEntity {
 //    @OrderBy(value="created")
 //    private Set<Schedule> schedules = new HashSet<>();
 
+    @OneToOne
+    @JoinColumn(name = "timeslot")
+    private TimeSlot timeSlot;
+
     public long getId() {
         return id;
     }
@@ -96,6 +100,14 @@ public class Course extends BaseEntity {
 //    public void setSchedules(Set<Schedule> schedules) {
 //        this.schedules = schedules;
 //    }
+
+    public TimeSlot getTimeSlot() {
+        return timeSlot;
+    }
+
+    public void setTimeSlot(TimeSlot timeSlot) {
+        this.timeSlot = timeSlot;
+    }
 
     @Override
     public String toString() {

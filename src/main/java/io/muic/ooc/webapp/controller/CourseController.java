@@ -59,11 +59,11 @@ public class CourseController {
     @RequestMapping(value = {"/", ""}, method = RequestMethod.POST)
     public Map createCourse(@RequestParam(required = false) String code, @RequestParam(required = false) String name,
                              @RequestParam(required = false) String time, @RequestParam(required = false) int capacity,
-                             @RequestParam(required = false) Long trimesterId) {
+                             @RequestParam(required = false) Long trimesterId, @RequestParam(required = false) List<Long> slotIds) {
         HashMap<String, Object> frb = new HashMap<>();
         Course course = null;
         if (!StringUtils.isBlank(code)) {
-            course = courseService.create(code, name, time, capacity, trimesterId);
+            course = courseService.create(code, name, time, capacity, trimesterId, slotIds);
         }
         frb.put(Course.SINGULAR, course);
         return frb;
@@ -72,11 +72,12 @@ public class CourseController {
     @RequestMapping(value = {"/{id}/", "/{id}"}, method = RequestMethod.POST)
     public Map updateCourse(@PathVariable long id, @RequestParam(required = false) String code,
                              @RequestParam(required = false) String name, @RequestParam(required = false) String time,
-                             @RequestParam(required = false) int capacity, @RequestParam(required = false) Long trimesterId) {
+                             @RequestParam(required = false) int capacity, @RequestParam(required = false) Long trimesterId,
+                            @RequestParam(required = false) List<Long> slotIds) {
         HashMap<String, Object> frb = new HashMap<>();
         Course course = null;
         if (!StringUtils.isBlank(code)) {
-            course = courseService.update(id, code, name, time, capacity, trimesterId);
+            course = courseService.update(id, code, name, time, capacity, trimesterId, slotIds);
         }
         frb.put(Course.SINGULAR, course);
         return frb;
